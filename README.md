@@ -1,4 +1,6 @@
-#GFWListToSurgeRule.js
-Surge Rule from GFWList
-[s5s5.github.io/GFWListToSurgeRule.js/](http://s5s5.github.io/GFWListToSurgeRule.js/)
+# GFWListToClashRule.js
+Clash Rule from GFWList
+[mingoooo.github.io/GFWListToClashRule.js/](http://mingoooo.github.io/GFWListToClashRule.js/)
+
+Base on [s5s5/GFWListToSurgeRule.js](s5s5/GFWListToSurgeRule.js)
 

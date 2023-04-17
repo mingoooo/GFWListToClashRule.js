@@ -6,7 +6,7 @@
     <meta name="Baiduspider" content="noarchive">
     <meta name="googlebot" content="noarchive">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>GFWListToSurgeRule.js</title>
+    <title>GFWListToClashRule.js</title>
     <style>
         body {
             background: black;
@@ -16,7 +16,7 @@
         #rule {
             width: 100%;
             box-sizing: border-box;
-            height: 20.5em;
+            height: 100vh;
             border-width: 0;
             border-left: dotted greenyellow 1px;
             background: black;
@@ -52,9 +52,9 @@
     </style>
 </head>
 <body>
-<h1>GFWListToSurgeRule.js</h1>
+<h1>GFWListToClashRule.js</h1>
 <textarea id="rule" placeholder="Loading..."></textarea>
-<a href="https://github.com/s5s5/GFWListToSurgeRule.js" class="github-corner">
+<a href="https://github.com/mingoooo/GFWListToClashRule.js" class="github-corner">
     <svg width="80" height="80" viewBox="0 0 250 250"
          style="fill:#fff; color:#151513; position: absolute; top: 0; border: 0; right: 0;">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -121,9 +121,9 @@
                 }
 
                 function getDomainKeyword(rule) {
-                    var domain$ = 's5s5$me';
+                    var domain$ = 'mingoooo$me';
                     var ruleType = 'DOMAIN';
-                    var domain = 's5s5.me';
+                    var domain = 'mingoooo.me';
                     var subDomain = '';
                     var hasProxy = true;
 
@@ -257,7 +257,7 @@
                     getDomainKeyword(obj);
 
                 }
-                delete ruleJSON.s5s5$me;
+                delete ruleJSON.mingoooo$me;
                 localStorage.timestamp = timestamp;
                 localStorage.ruleJSON = JSON.stringify(ruleJSON);
                 rule = ruleJSON;
@@ -308,53 +308,56 @@
                 }
             }
 
-            var surgeRule = " Rules from GFWList (GFWListToSurgeRule.js http://s5s5.github.io/GFWListToSurgeRule.js/)\n";
+            var clashRule = " Rules from GFWList (GFWListToClashRule.js http://mingoooo.github.io/GFWListToClashRule.js/)\n";
             var directRuleDomain = "";
             var directRuleSuffix = "";
             var directRuleKeyword = "";
             var proxyRuleDomain = "";
             var proxyRuleSuffix = "";
             var proxyRuleKeyword = "";
+            var ruleYamlKey = "rules:\n";
+            var arrayPrefix = "  - ";
             var rules = 0;
 
             for (var i = 0; i < ruleArr.length; i++) {
                 var o = ruleArr[i];
                 var hasProxy = o.hasProxy ? 'Proxy' : 'DIRECT';
                 if (!o.hasProxy && (o.ruleType === "DOMAIN")) {
-                    directRuleDomain += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    directRuleDomain += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
                 if (!o.hasProxy && (o.ruleType === "DOMAIN-SUFFIX")) {
-                    directRuleSuffix += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    directRuleSuffix += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
                 if (!o.hasProxy && (o.ruleType === "DOMAIN-KEYWORD")) {
-                    directRuleKeyword += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    directRuleKeyword += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
                 if (o.hasProxy && (o.ruleType === "DOMAIN")) {
-                    proxyRuleDomain += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    proxyRuleDomain += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
                 if (o.hasProxy && (o.ruleType === "DOMAIN-SUFFIX")) {
-                    proxyRuleSuffix += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    proxyRuleSuffix += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
                 if (o.hasProxy && (o.ruleType === "DOMAIN-KEYWORD")) {
-                    proxyRuleKeyword += o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
+                    proxyRuleKeyword += arrayPrefix + o.ruleType + ',' + o.domain + ',' + hasProxy + '\n';
                     rules++
                 }
             }
 
-            surgeRule = "# " + rules
-                    + surgeRule
+            clashRule = "# " + rules
+                    + clashRule
+                    + ruleYamlKey
                     + directRuleDomain
                     + directRuleSuffix
                     + directRuleKeyword
                     + proxyRuleDomain
                     + proxyRuleSuffix
                     + proxyRuleKeyword;
-            out.val(surgeRule);
+            out.val(clashRule);
 
         }
 
